@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Simulation Game
+</body>
+<script>
+    function Vehicle(brand,model,speed,fuelType){
+        this.Brand=brand;
+        this.Model=model;
+        this.Speed=speed;
+        this.FuelType=fuelType;
+    };
+        Vehicle.prototype.accelerate=function(increase){
+            this.Speed += increase;
+            console.log("Vehicle Speed is", this.Speed)
+        };
+        Vehicle.prototype.break=function(decrease){
+            this.Speed -= decrease;
+            console.log("apply Break");
+        };
+        Vehicle.prototype.refuel=function(){
+            console.log("Refulling the Vehicle");
+        };
+
+//----------------------Function Of Car---------------------------//
+    function Car(brand,model,speed,fuelType,noOfwheels){
+        Vehicle.call(this,brand,model,speed,fuelType);
+        this.NoofWheels=noOfwheels;
+    };
+    Object.setPrototypeOf(Car.prototype,Vehicle.prototype)
+
+    Car.prototype.honk=function(){
+        console.log("Honk! Honk!")
+    };
+
+//--------------------Function Of Airplane-----------------------//
+    function Airplane(brand,model,speed,fuelType,noOfwheels,numberOfEngines,hasLandingGear){
+        Vehicle.call(this,brand,model,speed,fuelType);
+        this.NoofWheels=noOfwheels;
+        this.NumberOfEngines=numberOfEngines;
+        this.HasLandingGear=hasLandingGear;
+    };
+    Object.setPrototypeOf(Airplane.prototype,Vehicle.prototype);
+
+    Airplane.prototype.takeOff=function(){
+        console.log(this.Brand,"is Taking Off");
+    };
+
+//-----------------------Instance Of Car---------------------------//
+    let Car1=new Car("TATA","Safari",0,"Diesel",4);
+    console.log(Car1);
+    Car1.accelerate(45);
+    Car1.break(10);
+    Car1.refuel();
+    Car1.honk();
+
+//----------------------Instance Of Airplane----------------------//
+    let Air1=new Airplane("AirIndia",360,0,"Jet Fuel",10,4,true);
+    console.log(Air1);
+    Air1.accelerate(200);
+    Air1.break(50);
+    Air1.refuel();
+    Air1.takeOff();
+
+</script>
+</html>
